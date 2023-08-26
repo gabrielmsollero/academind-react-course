@@ -2,8 +2,8 @@ name: Docker Image CI
 
 on:
   push:
-    paths:
-      - 'package*.json' # Execute only when modules are affected by commit
+    branches-ignore:
+      - 'main'
       
 jobs:
   build:
