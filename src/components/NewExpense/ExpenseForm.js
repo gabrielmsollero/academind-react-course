@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 import "./ExpenseForm.css";
-import { checkPropTypes } from "prop-types";
 
 function ExpenseForm(props) {
   const [enteredTitle, setEnteredTitle] = useState("");
@@ -22,7 +21,7 @@ function ExpenseForm(props) {
     event.preventDefault();
     const expenseData = {
       title: enteredTitle,
-      amount: enteredAmount,
+      amount: +enteredAmount,
       date: new Date(enteredDate),
     };
 
@@ -69,6 +68,7 @@ function ExpenseForm(props) {
           />
         </div>
         <div className="new-expense__actions">
+          <button type="button" onClick={props.onCancel}>Cancel</button>
           <button type="submit">Add Expense</button>
         </div>
       </div>
