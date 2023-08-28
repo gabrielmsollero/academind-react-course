@@ -3,19 +3,19 @@ import Card from "./Card";
 
 import styles from "./ErrorModal.module.css";
 
-function ErrorModal() {
+function ErrorModal(props) {
   return (
     <div>
-      <div className={styles.backdrop}></div>
+      <div className={styles.backdrop} onClick={props.onDismissed}></div>
       <Card className={styles.modal}>
         <header className={styles.header}>
-          <h2>Testing</h2>
+          <h2>Something went wrong!</h2>
         </header>
         <div className={styles.content}>
-          <p>Testinggg</p>
+          <p>{props.msg}</p>
         </div>
         <footer class={styles.actions}>
-          <Button>Okay</Button>
+          <Button onClick={props.onDismissed}>Okay</Button>
         </footer>
       </Card>
     </div>

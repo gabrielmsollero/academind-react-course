@@ -1,13 +1,18 @@
-import Card from '../UI/Card';
+import Card from "../UI/Card";
 
-import styles from './UsersList.module.css'
+import styles from "./UsersList.module.css";
 
-function UsersList() {
+function UsersList({ users }) {
   return (
     <Card className={styles.users}>
       <ul>
-        <li>Testing 123</li>
-        <li>Testing 123</li>
+        {users.map((user) => {
+          return (
+            <li key={user.key}>
+              {user.name} ({user.age} years old)
+            </li>
+          );
+        })}
       </ul>
     </Card>
   );
