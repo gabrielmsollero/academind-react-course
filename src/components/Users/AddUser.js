@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 import Button from "../UI/Button";
 import Card from "../UI/Card";
@@ -12,41 +12,31 @@ const defaultUserInput = {
 };
 
 function AddUser(props) {
-  const [userInput, setUserInput] = useState(defaultUserInput);
+  const nameInputRef = useRef();
+  const ageInputRef = useRef();
+
   const [errorMsg, setErrorMsg] = useState("");
 
-  function inputChangedHandler(event) {
-    setUserInput((prevInput) => {
-      return {
-        ...prevInput,
-        [event.target.id]: event.target.value,
-      };
-    });
-  }
-
   function addUserHandler(event) {
+    const enteredName = nameInputRef.current.value;
+    const enteredAge = ageInputRef.current.value;
+
     event.preventDefault();
 
-    /* The code below would work for any number of inputs, 
-     * and would automatically validate if we decided to
-     * insert new fields in the form.
-     */
-    if (
-      Object.values(userInput)
-        .map((input) => input.trim().length)
-        .includes(0)
-    ) {
+    if ([enteredName.length, enteredAge.length].includes(0)) {
       setErrorMsg("There are empty fields!");
       return;
     }
 
-    if (+userInput.age <= 0) {
+    if (enteredAge <= 0) {
       setErrorMsg("Age may not be < 0!");
       return;
     }
 
-    props.onSubmit(userInput);
-    setUserInput(defaultUserInput);
+    props.onSubmit({ name: enteredName, age: enteredAge });
+
+    nameInputRef.current.value = "";
+    ageInputRef.current.value = "";
   }
 
   function errDismissHandler() {
@@ -62,12 +52,7 @@ function AddUser(props) {
         <form onSubmit={addUserHandler}>
           <p>
             <label htmlFor="name">Username</label>
-            <input
-              type="text"
-              id="name"
-              value={userInput.name}
-              onChange={inputChangedHandler}
-            />
+            <input type="text" id="name" ref={nameInputRef} />
           </p>
           <p>
             <label htmlFor="age">Age (Years)</label>
@@ -75,8 +60,7 @@ function AddUser(props) {
               type="number"
               // min="0"
               id="age"
-              value={userInput.age}
-              onChange={inputChangedHandler}
+              ref={ageInputRef}
             />
           </p>
           <Button type="submit">Add User</Button>
