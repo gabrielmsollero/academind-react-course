@@ -54,7 +54,7 @@ function AddUser(props) {
   }
 
   return (
-    <div>
+    <>
       {errorMsg && (
         <ErrorModal msg={errorMsg} onDismissed={errDismissHandler} />
       )}
@@ -82,7 +82,7 @@ function AddUser(props) {
           <Button type="submit">Add User</Button>
         </form>
       </Card>
-    </div>
+    </>
   );
 }
 

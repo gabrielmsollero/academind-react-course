@@ -12,14 +12,14 @@ function App() {
   }
 
   return (
-    <div>
+    <>
       <AddUser onSubmit={addUserHandler} />
       {users.length > 0 ? (
         <UsersList users={users} />
       ) : (
         <p style={{ textAlign: "center", color: 'white' }}>No users registered yet.</p>
       )}
-    </div>
+    </>
   );
 }
 
