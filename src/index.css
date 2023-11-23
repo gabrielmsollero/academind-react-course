@@ -50,6 +50,19 @@ h1 {
   text-transform: uppercase;
 }
 
+.center {
+  text-align: center;
+}
+
+.error {
+  max-width: 75%;
+  background-color: salmon;
+  color: #2c2306;
+  border-radius: 0.5rem;
+  margin: auto;
+  padding: 1rem;
+}
+
 #meals {
   width: 90%;
   max-width: 70rem;
