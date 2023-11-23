@@ -7,7 +7,7 @@ I followed this course using Docker instead of downloading NodeJS to my machine,
 docker container run --rm -it -p <host_port>:<container_port> gabrielmsollero/react-course:<branch_name>
 ```
 
-**Note:** Until branch `13-working-with-forms`, except for `06c-practice-project`, the container port should be 3000. For later branches it should be 5173. This is due to a course update which happened while I was in the middle of it, where the author changed the default project configurations to use the Vite framework.
+**Note:** Some of the branches have React applications built with `create-react-app` and others use `Vite`. In the former, the exposed port is **3000** by default, while in the latter it should be **5173**. This is due to a course update which happened while I was in the middle of it, where the author changed the default project configurations to use the Vite framework.
 
 Thanks to Github Actions, I've created the [CI Workflow](https://github.com/gabrielmsollero/academind-react-course/blob/main/.github/workflows/ci.yml) which builds a new image for every new branch or whenever package*.json files are changed. The image is then pushed to my [react-course](https://hub.docker.com/repository/docker/gabrielmsollero/react-course) repository in Dockerhub, tagged with the name of the corresponding branch.
 
