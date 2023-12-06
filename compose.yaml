@@ -1,0 +1,15 @@
+services:
+  web-app:
+    build: frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/src:/usr/src/app/src
+      - ./frontend/public:/usr/src/app/public
+      - ./frontend/index.html:/usr/src/app/index.html
+          
+  backend:
+    build: backend
+    ports:
+      - "3001:8080"
+      
