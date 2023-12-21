@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import MeetupList from "../components/meetups/MeetupList";
 
 const DUMMY_MEETUPS = [
@@ -38,9 +39,22 @@ export async function getServerSideProps(context) {
  * Better for caching
  */
 export async function getStaticProps() {
+  const client = await MongoClient.connect(process.env.MONGO_CONN_STRING);
+  const db = client.db();
+  const meetupsColl = db.collection("meetups");
+
+  const meetups = await meetupsColl.find().toArray();
+
+  client.close();
+
   return {
     props: {
-      meetups: DUMMY_MEETUPS,
+      meetups: meetups.map(meetup => ({
+        title: meetup.title,
+        address: meetup.address,
+        image: meetup.image,
+        id: meetup._id.toString(),
+      })),
     },
     revalidate: 10,
   };
